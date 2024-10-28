@@ -13,7 +13,8 @@ public class ScreeningCreateUseCase {
     @NonNull
     private final ScreeningGateway screeningGateway;
 
-    public Output execute(final Input input){
+
+	public Output execute(final Input input){
        final var newScreening = Screening.newScreening(
                input.profession(), input.linkedin(), input.activityArea(), input.currentPosition(),
                input.areaOfInterest(), input.desiredPosition(), input.timeToAchieveGoal());
