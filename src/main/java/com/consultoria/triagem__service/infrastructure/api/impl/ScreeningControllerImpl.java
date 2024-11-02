@@ -1,16 +1,16 @@
-package com.consultoria.triagem__service.infrastructure.api;
+package com.consultoria.triagem__service.infrastructure.api.impl;
 
 
 import java.net.URI;
 import java.util.UUID;
 
 import com.consultoria.triagem__service.application.useCases.ScreeningCreateUseCase;
-import com.consultoria.triagem__service.application.useCases.ScreeningDeleteUseCase;
 import com.consultoria.triagem__service.application.useCases.ScreeningGetByIdUseCase;
 import com.consultoria.triagem__service.application.useCases.ScreeningUpdateUseCase;
-import com.consultoria.triagem__service.model.CreateScreeningDTO;
-import com.consultoria.triagem__service.model.ScreeningDTO;
-import com.consultoria.triagem__service.model.UpdateScreeningDTO;
+import com.consultoria.triagem__service.infrastructure.api.ScreeningsController;
+import com.consultoria.triagem__service.model.input.CreateScreeningDTO;
+import com.consultoria.triagem__service.model.output.ScreeningDTO;
+import com.consultoria.triagem__service.model.input.UpdateScreeningDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +19,14 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class ScreeningController implements ScreeningsApi {
+public class ScreeningControllerImpl implements ScreeningsController {
 
 	@NonNull
 	private final ScreeningCreateUseCase screeningCreateUseCase;
-	@NonNull
-	private final ScreeningDeleteUseCase screeningDeleteUseCase;
+
 	@NonNull
 	private final ScreeningGetByIdUseCase screeningGetByIdUseCase;
+
 	@NonNull
 	private final ScreeningUpdateUseCase screeningUpdateUseCase;
 
@@ -51,13 +51,23 @@ public class ScreeningController implements ScreeningsApi {
 	}
 
 	@Override
-	public ResponseEntity<Void> deleteScreeningById(final UUID id) {
-		screeningDeleteUseCase.execute(id);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<ScreeningDTO> getScreeningById(final UUID id) {
+		ScreeningGetByIdUseCase.Output output = screeningGetByIdUseCase.execute(id);
+		final var response = new ScreeningDTO()
+				.id(output.id())
+				.userId(output.userId())
+				.profession(output.profession())
+				.linkedin(output.linkedin())
+				.activityArea(output.activityArea())
+				.currentPosition(output.currentPosition())
+				.areaOfInterest(output.areaOfInterest())
+				.desiredPosition(output.desiredPosition())
+				.timeToAchieveGoal(output.timeToAchieveGoal());
+		return ResponseEntity.ok(response);
 	}
 
 	@Override
-	public ResponseEntity<ScreeningDTO> getScreeningById(final UUID id) {
+	public ResponseEntity<ScreeningDTO> getScreeningByUserId(final UUID id) {
 		ScreeningGetByIdUseCase.Output output = screeningGetByIdUseCase.execute(id);
 		final var response = new ScreeningDTO()
 				.id(output.id())

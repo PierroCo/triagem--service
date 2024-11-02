@@ -1,4 +1,4 @@
-package com.consultoria.triagem__service.model;
+package com.consultoria.triagem__service.model.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,16 +1,16 @@
-package com.consultoria.triagem__service.model;
-
-import lombok.Data;
-import lombok.experimental.Accessors;
+package com.consultoria.triagem__service.model.input;
 
 import java.util.Date;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Accessors(fluent = true)
-public class ScreeningDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateScreeningDTO {
 
-	private UUID id;
 	private UUID userId;
 	private String profession;
 	private String linkedin;
