@@ -4,11 +4,14 @@ import com.consultoria.triagem__service.application.domain.screening.Screening;
 import com.consultoria.triagem__service.application.gateway.ScreeningGateway;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Comment;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.UUID;
 
 @RequiredArgsConstructor
+@Component
 public class ScreeningCreateUseCase {
     @NonNull
     private final ScreeningGateway screeningGateway;

@@ -11,6 +11,7 @@ import com.consultoria.triagem__service.infrastructure.api.ScreeningsController;
 import com.consultoria.triagem__service.model.input.CreateScreeningDTO;
 import com.consultoria.triagem__service.model.output.ScreeningDTO;
 import com.consultoria.triagem__service.model.input.UpdateScreeningDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,21 +67,21 @@ public class ScreeningControllerImpl implements ScreeningsController {
 		return ResponseEntity.ok(response);
 	}
 
-	@Override
-	public ResponseEntity<ScreeningDTO> getScreeningByUserId(final UUID id) {
-		ScreeningGetByIdUseCase.Output output = screeningGetByIdUseCase.execute(id);
-		final var response = new ScreeningDTO()
-				.id(output.id())
-				.userId(output.userId())
-				.profession(output.profession())
-				.linkedin(output.linkedin())
-				.activityArea(output.activityArea())
-				.currentPosition(output.currentPosition())
-				.areaOfInterest(output.areaOfInterest())
-				.desiredPosition(output.desiredPosition())
-				.timeToAchieveGoal(output.timeToAchieveGoal());
-		return ResponseEntity.ok(response);
-	}
+//	@Override
+//	public ResponseEntity<ScreeningDTO> getScreeningByUserId(final UUID id) {
+//		ScreeningGetByIdUseCase.Output output = screeningGetByIdUseCase.execute(id);
+//		final var response = new ScreeningDTO()
+//				.id(output.id())
+//				.userId(output.userId())
+//				.profession(output.profession())
+//				.linkedin(output.linkedin())
+//				.activityArea(output.activityArea())
+//				.currentPosition(output.currentPosition())
+//				.areaOfInterest(output.areaOfInterest())
+//				.desiredPosition(output.desiredPosition())
+//				.timeToAchieveGoal(output.timeToAchieveGoal());
+//		return ResponseEntity.ok(response);
+//	}
 
 	@Override
 	public ResponseEntity<ScreeningDTO> updateScreeningById(final UUID id, final UUID userId, final UpdateScreeningDTO body) {

@@ -1,15 +1,13 @@
 package com.consultoria.triagem__service.application.domain.screening;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 public class Screening {
     UUID id;
     UUID userId;

@@ -86,19 +86,19 @@ public class ScreeningJPAEntity {
 		updatedAt = Instant.now();
 	}
 
-//	public Screening toScreening() {
-//		return Screening.builder()
-//				.id(this.id)
-//				.userId(this.userId)
-//				.profession(this.profession)
-//				.linkedin(this.linkedin)
-//				.activityArea(this.activityArea)
-//				.currentPosition(this.currentPosition)
-//				.areaOfInterest(this.areaOfInterest)
-//				.desiredPosition(this.desiredPosition)
-//				.timeToAchieveGoal(this.timeToAchieveGoal)
-//				.build();
-//	}
+	public Screening toScreening() {
+		return Screening.builder()
+				.id(this.id)
+				.userId(this.userId)
+				.profession(this.profession)
+				.linkedin(this.linkedin)
+				.activityArea(this.activityArea)
+				.currentPosition(this.currentPosition)
+				.areaOfInterest(this.areaOfInterest)
+				.desiredPosition(this.desiredPosition)
+				.timeToAchieveGoal(this.timeToAchieveGoal)
+				.build();
+	}
 
 	public static ScreeningJPAEntity from(Screening screening) {
 		return ScreeningJPAEntity.builder()
