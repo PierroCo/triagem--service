@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateScreeningDTO {
-
+	private int age;
 	private String profession;
 	private String linkedin;
 	private String activityArea;
@@ -18,5 +18,4 @@ public class UpdateScreeningDTO {
 	private String areaOfInterest;
 	private String desiredPosition;
 	private Date timeToAchieveGoal;
-
 }

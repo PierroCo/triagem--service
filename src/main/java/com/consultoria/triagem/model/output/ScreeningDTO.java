@@ -10,8 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ScreeningDTO {
-	private UUID id;
-	private UUID userId;
+	private int age;
 	private String profession;
 	private String linkedin;
 	private String activityArea;
@@ -19,4 +18,6 @@ public class ScreeningDTO {
 	private String areaOfInterest;
 	private String desiredPosition;
 	private Date timeToAchieveGoal;
+	private Date fillDate;
+	private Date lastUpdate;
 }
