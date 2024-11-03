@@ -21,14 +21,14 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "screenings")
+@Table(name = "screening")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-public class ScreeningJPAEntity {
+public class ScreeningEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -100,8 +100,8 @@ public class ScreeningJPAEntity {
 				.build();
 	}
 
-	public static ScreeningJPAEntity from(Screening screening) {
-		return ScreeningJPAEntity.builder()
+	public static ScreeningEntity from(Screening screening) {
+		return ScreeningEntity.builder()
 				.id(screening.getId())
 				.userId(screening.getUserId())
 				.profession(screening.getProfession())
