@@ -8,17 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-
 @RequestMapping("/screening")
 public interface ScreeningsController {
 
 	@PostMapping
 	ResponseEntity<ScreeningDTO> createScreening(@RequestBody CreateScreeningDTO body);
 
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<ScreeningDTO> getScreeningById(@PathVariable UUID id);
 
-	@GetMapping("/user/{id}")
+	@GetMapping("/{id}")
 	ResponseEntity<ScreeningDTO> getScreeningByUserId(@PathVariable UUID id);
 
 	@PutMapping("/{id}")
