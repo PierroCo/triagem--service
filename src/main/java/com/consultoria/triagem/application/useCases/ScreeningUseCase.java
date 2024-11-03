@@ -45,7 +45,6 @@ public class ScreeningUseCase {
 
     public ScreeningDTO updateScreening(UUID id, UpdateScreeningDTO updateScreeningDTO) {
         return screeningRepository.findById(id).map(existingEntity -> {
-            // Atualiza os campos necessários
             existingEntity.setProfession(updateScreeningDTO.getProfession());
             existingEntity.setLinkedin(updateScreeningDTO.getLinkedin());
             existingEntity.setActivityArea(updateScreeningDTO.getActivityArea());
