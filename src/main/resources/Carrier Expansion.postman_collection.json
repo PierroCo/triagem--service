@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "accd2166-2739-45bf-abc1-778bf5e57f98",
+		"name": "Carrier Expansion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14713958"
+	},
+	"item": [
+		{
+			"name": "Criar Triagem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuarioId\": \"c2a234e3-12b6-4d2a-b89c-2f5e1d334567\",\r\n    \"idade\": 23,\r\n    \"profissao\": \"Software Engineer\",\r\n    \"perfilLinkedin\": \"https://www.linkedin.com/in/usuario\",\r\n    \"areaAtuacao\": \"IT\",\r\n    \"cargoAtual\": 1,\r\n    \"areaDeInteresse\": \"Machine Learning\",\r\n    \"cargoDeInteresse\": 2,\r\n    \"tempoParaAlcancarObjetivo\": 180,\r\n    \"habilidades\": [\r\n        1,2,3,4,5,6,7,8\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/triagem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"triagem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analise de Triagem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/analise/857373b0-8f8f-455c-80db-b90cd2ed9fa0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"analise",
+						"857373b0-8f8f-455c-80db-b90cd2ed9fa0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Triagem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"e0089f4c-a74f-4f4a-819d-7a1b7327c53f\",\r\n    \"usuarioId\": \"c2a234e3-12b6-4d2a-b89c-2f5e1d334567\",\r\n    \"idade\": 23,\r\n    \"profissao\": \"Software Engineer\",\r\n    \"perfilLinkedin\": \"https://www.linkedin.com/in/usuario\",\r\n    \"areaAtuacao\": \"IT\",\r\n    \"cargoAtual\": 1,\r\n    \"areaDeInteresse\": \"Machine Worst\",\r\n    \"cargoDeInteresse\": 2,\r\n    \"tempoParaAlcancarObjetivo\": 180,\r\n    \"ativo\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/triagem/e0089f4c-a74f-4f4a-819d-7a1b7327c53f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"triagem",
+						"e0089f4c-a74f-4f4a-819d-7a1b7327c53f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Triagem by Usuario Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/triagem/user/c2a234e3-12b6-4d2a-b89c-2f5e1d334567",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"triagem",
+						"user",
+						"c2a234e3-12b6-4d2a-b89c-2f5e1d334567"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Triagem by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/triagem/e0089f4c-a74f-4f4a-819d-7a1b7327c53f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"triagem",
+						"e0089f4c-a74f-4f4a-819d-7a1b7327c53f"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
