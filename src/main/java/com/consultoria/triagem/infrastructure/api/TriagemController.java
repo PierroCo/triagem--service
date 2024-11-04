@@ -18,7 +18,7 @@ public interface TriagemController {
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<TriagemOutput> getTriagemById(@PathVariable UUID id);
 
-	@GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/usuario/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<List<TriagemOutput>> getTriagensByUserId(@PathVariable UUID userId);
 
 	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
