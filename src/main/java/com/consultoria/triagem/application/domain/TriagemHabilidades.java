@@ -18,6 +18,10 @@ public class TriagemHabilidades {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    private UUID triagem;
+
+    @ManyToOne
+    @JoinColumn(name = "triagem_id", nullable = false)
+    private Triagem triagem;  // Alterado para ser uma relação com a entidade Triagem
+
     private Integer habilidade;
 }

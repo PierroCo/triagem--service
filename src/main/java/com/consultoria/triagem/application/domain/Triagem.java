@@ -14,7 +14,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
 @Entity

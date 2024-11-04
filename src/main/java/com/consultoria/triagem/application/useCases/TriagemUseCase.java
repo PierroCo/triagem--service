@@ -1,9 +1,9 @@
 package com.consultoria.triagem.application.useCases;
 
-import com.consultoria.triagem.application.domain.exceptions.ScreeningNotFoundException;
 import com.consultoria.triagem.application.domain.Triagem;
+import com.consultoria.triagem.application.domain.exceptions.TriagemNotFoundException;
 import com.consultoria.triagem.application.useCases.converter.TriagemConverter;
-import com.consultoria.triagem.infrastructure.persistence.repository.CargoHabilidadeRepository;
+import com.consultoria.triagem.infrastructure.persistence.repository.TriagemRepository;
 import com.consultoria.triagem.model.input.PreencherTriagemInput;
 import com.consultoria.triagem.model.input.UpdateTriagemInput;
 import com.consultoria.triagem.model.output.TriagemOutput;
@@ -21,9 +21,6 @@ public class TriagemUseCase {
 
     private final TriagemConverter triagemConverter;
     private final TriagemRepository triagemRepository;
-    private final TriagemHabilidadesRepository triagemHabilidadesRepository;
-    private final CargoRepository cargoRepository;
-    private final CargoHabilidadeRepository cargoHabilidadeRepository;
 
     public TriagemOutput criarTriagem(PreencherTriagemInput preencherTriagemInput) {
         Triagem triagem = triagemConverter.inputToObject(preencherTriagemInput);
@@ -33,15 +30,15 @@ public class TriagemUseCase {
 
     public TriagemOutput getTriagemById(UUID id) {
         Triagem triagem = triagemRepository.findById(id)
-                .orElseThrow(() -> new ScreeningNotFoundException("Screening not found with ID: " + id));
+                .orElseThrow(() -> new TriagemNotFoundException("Screening not found with ID: " + id));
         return triagemConverter.objectToOutput(triagem);
     }
 
     public List<TriagemOutput> getTriagemByUserId(UUID userId) {
-        Optional<Triagem> triagens = triagemRepository.findByUserId(userId);
+        Optional<Triagem> triagens = triagemRepository.findByUsuarioId(userId);
 
         if (triagens.isEmpty()) {
-            throw new ScreeningNotFoundException("Screening not found with ID: " + userId);
+            throw new TriagemNotFoundException("Screening not found with ID: " + userId);
         }
 
         return triagens.stream()
@@ -63,6 +60,6 @@ public class TriagemUseCase {
 
             Triagem updatedEntity = triagemRepository.save(existingTriagem);
             return triagemConverter.objectToOutput(updatedEntity);
-        }).orElseThrow(() -> new ScreeningNotFoundException("Screening not found with ID: " + id));
+        }).orElseThrow(() -> new TriagemNotFoundException("Screening not found with ID: " + id));
     }
 }

@@ -1,6 +1,6 @@
 package com.consultoria.triagem.infrastructure.persistence.repository;
 
-import com.carrerexpansion.gestao_triagem.core.domain.Cargo;
+import com.consultoria.triagem.application.domain.Cargo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
