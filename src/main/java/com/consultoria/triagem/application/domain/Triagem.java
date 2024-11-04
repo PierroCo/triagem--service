@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -43,6 +44,8 @@ public class Triagem {
     private int cargoDeInteresse;
     @Positive(message = "Time to achieve goal must be a valid date.")
     private int tempoParaAlcancarObjetivo;
+    @Column(nullable = false)
+    private Set<Integer> habilidades;
 
     @Builder.Default
     private boolean ativo = true;

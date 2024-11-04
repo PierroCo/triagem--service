@@ -3,6 +3,7 @@ package com.consultoria.triagem.model.output;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -20,6 +21,7 @@ public class TriagemOutput {
 	private String areaDeInteresse;
 	private int cargoDeInteresse;
 	private int tempoParaAlcancarObjetivo;
+	private Set<Integer> habilidades;
 	private boolean ativo;
 	private Instant updatedAt;
 	private Instant createdAt;

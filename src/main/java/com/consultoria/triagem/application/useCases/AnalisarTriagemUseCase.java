@@ -27,46 +27,52 @@ public class AnalisarTriagemUseCase {
     private final CargoHabilidadeRepository cargoHabilidadeRepository;
 
     public StatusAnaliseOutput analisar(UUID triagemId) {
-        Triagem triagem = triagemRepository.findById(triagemId).orElseThrow(() -> new AnaliseTriagemException("ID da triagem não existe"));
+        Triagem triagem = buscarTriagem(triagemId);
+        validarAreaECargoAtual(triagem);
+        Cargo cargo = buscarCargo(triagem.getCargoDeInteresse());
+        validarTempoParaObjetivo(triagem, cargo);
+        validarHabilidades(triagemId, triagem.getCargoDeInteresse());
 
-        List<TriagemHabilidades> habilidadesTriagem = triagemHabilidadesRepository.findAllByTriagem_Id(triagemId);
+        return new StatusAnaliseOutput("Análise realizada com sucesso. Nenhuma inconsistência encontrada");
+    }
 
-        List<CargoHabilidade> habilidadesCargo = cargoHabilidadeRepository.findAllByCargoId(triagem.getCargoDeInteresse());
+    private Triagem buscarTriagem(UUID triagemId) {
+        return triagemRepository.findById(triagemId)
+                .orElseThrow(() -> new AnaliseTriagemException("ID da triagem não existe"));
+    }
 
-        Cargo cargo = cargoRepository.findById(triagem.getCargoDeInteresse()).orElseThrow(() -> new AnaliseTriagemException("Cargo de interesse não existe"));
-
+    private void validarAreaECargoAtual(Triagem triagem) {
         if (Objects.equals(triagem.getAreaAtuacao(), triagem.getAreaDeInteresse()) &&
                 Objects.equals(triagem.getCargoAtual(), triagem.getCargoDeInteresse())) {
             throw new AnaliseTriagemException("O cargo/área de interesse deve ser diferente do cargo/área atual");
         }
+    }
 
-        if (triagem.getTempoParaAlcancarObjetivo() > cargo.getTempoMinimo()) {
+    private Cargo buscarCargo(Integer cargoDeInteresse) {
+        return cargoRepository.findById(cargoDeInteresse)
+                .orElseThrow(() -> new AnaliseTriagemException("Cargo de interesse não existe"));
+    }
+
+    private void validarTempoParaObjetivo(Triagem triagem, Cargo cargo) {
+        if (triagem.getTempoParaAlcancarObjetivo() < cargo.getTempoMinimo()) {
             throw new AnaliseTriagemException(
                     "O cargo " + cargo.getDescricao() +
                             " não pode ser atingido num prazo inferior a " +
                             cargo.getTempoMinimo()
             );
         }
+    }
 
-        boolean encontrou;
+    private void validarHabilidades(UUID triagemId, Integer cargoDeInteresse) {
+        List<TriagemHabilidades> habilidadesTriagem = triagemHabilidadesRepository.findAllByTriagem_Id(triagemId);
+        List<CargoHabilidade> habilidadesCargo = cargoHabilidadeRepository.findAllByCargoId(cargoDeInteresse);
 
         for (CargoHabilidade habilidadeCargo : habilidadesCargo) {
-            encontrou = false;
-
-            for (TriagemHabilidades habilidadeTriagem : habilidadesTriagem) {
-                if (habilidadeTriagem.getHabilidade().equals(habilidadeCargo.getHabilidadeId())) {
-                    encontrou = true;
-                    break;
-                }
-            }
-
-            if (!encontrou) {
+            if (habilidadesTriagem.stream().noneMatch(
+                    habilidadeTriagem -> habilidadeTriagem.getHabilidade().equals(habilidadeCargo.getHabilidadeId())
+            )) {
                 throw new AnaliseTriagemException("O cliente não possui todas as habilidades para o cargo almejado");
             }
         }
-
-        return new StatusAnaliseOutput(
-                "Análise realizada com sucesso. Nenhuma inconsistência encontrada"
-        );
     }
 }

@@ -1,5 +1,6 @@
 package com.consultoria.triagem.model.input;
 
+import java.util.Set;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -21,4 +22,5 @@ public class PreencherTriagemInput {
 	private String areaDeInteresse;
 	private int cargoDeInteresse;
 	private int tempoParaAlcancarObjetivo;
+	Set<Integer> habilidades;
 }

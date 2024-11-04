@@ -22,6 +22,7 @@ public class TriagemConverter {
                 .areaDeInteresse(preencherTriagemInput.getAreaDeInteresse())
                 .cargoDeInteresse(preencherTriagemInput.getCargoDeInteresse())
                 .tempoParaAlcancarObjetivo(preencherTriagemInput.getTempoParaAlcancarObjetivo())
+                .habilidades(preencherTriagemInput.getHabilidades())
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class TriagemConverter {
                 .areaDeInteresse(triagem.getAreaDeInteresse())
                 .cargoDeInteresse(triagem.getCargoDeInteresse())
                 .tempoParaAlcancarObjetivo(triagem.getTempoParaAlcancarObjetivo())
+                .habilidades(triagem.getHabilidades())
                 .ativo(triagem.isAtivo())
                 .updatedAt(triagem.getUpdatedAt())
                 .createdAt(triagem.getCreatedAt())

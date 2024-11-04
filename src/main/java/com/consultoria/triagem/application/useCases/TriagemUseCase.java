@@ -1,8 +1,10 @@
 package com.consultoria.triagem.application.useCases;
 
 import com.consultoria.triagem.application.domain.Triagem;
+import com.consultoria.triagem.application.domain.TriagemHabilidades;
 import com.consultoria.triagem.application.domain.exceptions.TriagemNotFoundException;
 import com.consultoria.triagem.application.useCases.converter.TriagemConverter;
+import com.consultoria.triagem.infrastructure.persistence.repository.TriagemHabilidadesRepository;
 import com.consultoria.triagem.infrastructure.persistence.repository.TriagemRepository;
 import com.consultoria.triagem.model.input.PreencherTriagemInput;
 import com.consultoria.triagem.model.input.UpdateTriagemInput;
@@ -21,12 +23,22 @@ public class TriagemUseCase {
 
     private final TriagemConverter triagemConverter;
     private final TriagemRepository triagemRepository;
+    private final TriagemHabilidadesRepository triagemHabilidadesRepository;
 
     public TriagemOutput criarTriagem(PreencherTriagemInput preencherTriagemInput) {
         Triagem triagem = triagemConverter.inputToObject(preencherTriagemInput);
         Triagem savedEntity = triagemRepository.save(triagem);
+
+        for (Integer habilidadeId : preencherTriagemInput.getHabilidades()) {
+            TriagemHabilidades habilidadeTriagem = new TriagemHabilidades();
+            habilidadeTriagem.setTriagem(savedEntity);
+            habilidadeTriagem.setHabilidade(habilidadeId);
+            triagemHabilidadesRepository.save(habilidadeTriagem);
+        }
+
         return triagemConverter.objectToOutput(savedEntity);
     }
+
 
     public TriagemOutput getTriagemById(UUID id) {
         Triagem triagem = triagemRepository.findById(id)
